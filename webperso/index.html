@@ -4,10 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>webperso</title>
+    <title>Manif</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="src/style.css">
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+  <!-- <ul>
+    <li>Accueil</li>
+    <li><input type="search"></li>
+    <li>
+    <router-link to="/login">Login</router-link>
+      <ul><li>register</li></ul>
+    </li>
+  </ul> -->
+
+  <main>
+    <router-view></router-view>
+    <!-- <div class="login-card">
+      <h2>Connexion</h2>
+      <p>Veuillez vous connecter</p>
+      <label>Login<input type="text"></label>
+      <label>Password<input type="password"></label>
+      <input type="button" value="Confirmer">
+    </div> -->
+  </main>
+
+  <footer></footer>
   </body>
 </html>

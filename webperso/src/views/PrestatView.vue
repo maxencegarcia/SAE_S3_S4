@@ -1,0 +1,3 @@
+<template>
+  Presta caca
+</template>

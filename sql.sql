@@ -1,12 +1,21 @@
 DROP TABLE IF EXISTS reservation;
-DROP TABLE IF EXISTS evenement;
 DROP TABLE IF EXISTS prestataire;
+DROP TABLE IF EXISTS evenement;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     IDuser INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255) NOT NULL,
     mail VARCHAR(255) NOT NULL UNIQUE
+);
+
+
+
+CREATE TABLE evenement (
+    idevent INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(255) NOT NULL,
+    date_debut DATE NOT NULL,
+    date_fin DATE NOT NULL
 );
 
 CREATE TABLE prestataire (
@@ -17,13 +26,6 @@ CREATE TABLE prestataire (
     acces VARCHAR(255) NOT NULL,
     idevent INT NOT NULL,
     FOREIGN KEY (idevent) REFERENCES evenement(idevent)
-);
-
-CREATE TABLE evenement (
-    idevent INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(255) NOT NULL,
-    date_debut DATE NOT NULL,
-    date_fin DATE NOT NULL
 );
 
 CREATE TABLE reservation (
@@ -46,6 +48,7 @@ INSERT INTO evenement (nom, date_debut, date_fin) VALUES
 ('Conférence tech', '2026-09-15', '2026-09-15');
 
 INSERT INTO prestataire (login, mdp, mail, acces, idevent) VALUES
+('max', 'mdp', 'max@example.com', 'orga', 1),
 ('orgaadmin', 'admin123', 'orga@example.com', 'orga', 1),
 ('videoPro', 'password_hash', 'video@example.com', 'presta', 1),
 ('webDev', 'password_hash', 'webdev@example.com', 'presta', 2);

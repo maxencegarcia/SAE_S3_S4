@@ -1,0 +1,186 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f1efe8;
+  color: #2c2c2a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Navbar ── */
+.navbar {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #fff;
+  border-bottom: 0.5px solid #d3d1c7;
+  padding: 0 2rem;
+  height: 52px;
+}
+
+.navbar > li {
+  position: relative;
+  font-size: 14px;
+  cursor: pointer;
+  color: #5f5e5a;
+}
+
+.navbar > li:first-child {
+  font-weight: 500;
+  color: #2c2c2a;
+}
+
+.navbar > li:hover { color: #2c2c2a; }
+
+.navbar .dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  list-style: none;
+  background: #fff;
+  border: 0.5px solid #d3d1c7;
+  border-radius: 8px;
+  min-width: 120px;
+  padding: 6px 0;
+  z-index: 10;
+  flex-direction: column;
+  gap: 0;
+}
+
+.navbar > li:hover .dropdown { display: flex; }
+
+.navbar .dropdown li {
+  padding: 8px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.navbar .dropdown li:hover { background: #f1efe8; }
+
+.navbar input[type="search"] {
+  background: #f1efe8;
+  border: 0.5px solid #d3d1c7;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 13px;
+  outline: none;
+  width: 180px;
+}
+
+.navbar input[type="search"]:focus { border-color: #888780; }
+
+/* ── Layout ── */
+.page-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* ── Carte login ── */
+.login-card {
+  background: #fff;
+  border: 0.5px solid #d3d1c7;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-card h2 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #2c2c2a;
+}
+
+.login-card p {
+  font-size: 13px;
+  color: #888780;
+  margin-top: -0.5rem;
+}
+
+.login-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #5f5e5a;
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+  padding: 8px 10px;
+  border: 0.5px solid #d3d1c7;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  color: #2c2c2a;
+  width: 100%;
+}
+
+.login-card input[type="text"]:focus,
+.login-card input[type="password"]:focus {
+  border-color: #534ab7;
+  box-shadow: 0 0 0 2px #eeedfe;
+}
+
+.login-card input[type="button"],
+.login-card button {
+  padding: 9px;
+  background: #534ab7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  width: 100%;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="search"] {
+  background-color: #fff;
+  color: #2c2c2a;
+}
+
+.page-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.login-card input[type="button"]:hover,
+.login-card button:hover { background: #3c3489; }
+
+/* ── Footer ── */
+.site-footer {
+  border-top: 0.5px solid #d3d1c7;
+  height: 40px;
+  background: #fff;
+}
