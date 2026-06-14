@@ -3,22 +3,41 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import PrestatView from '../views/PrestatView.vue'
+import Defaultlayout from '../layouts/Defaultlayout.vue'
+import Prestalayout from '../layouts/prestalayout.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
             path: '/',
-            component: HomeView
+            component: Defaultlayout,
+            children: [
+                { path: '', component: HomeView}
+            ]
         },
         {
             path: '/login',
-            component: LoginView
+            component: Defaultlayout,
+            children: [
+                { path: '', component: LoginView}
+            ]
         },
         {
             path: '/presta',
-            component: PrestatView
+            component: Prestalayout,
+            children: [
+                { path: '', component: PrestatView}
+            ]
         }
+        // {
+        //     path: '/login',
+        //     component: LoginView
+        // },
+        // {
+        //     path: '/presta',
+        //     component: PrestatView
+        // }
     ]
 })
 
