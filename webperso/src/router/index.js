@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import PrestatView from '../views/PrestatView.vue'
 import Defaultlayout from '../layouts/Defaultlayout.vue'
 import Prestalayout from '../layouts/prestalayout.vue'
+import EventView from '../views/EventView.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,6 +15,13 @@ const router = createRouter({
             component: Defaultlayout,
             children: [
                 { path: '', component: HomeView}
+            ]
+        },
+        {
+            path: '/event',
+            component: Defaultlayout,
+            children: [
+                { path: '', component: EventView}
             ]
         },
         {

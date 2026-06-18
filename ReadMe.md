@@ -38,3 +38,8 @@ found 0 vulnerabilities
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 ^C
+
+
+node server.js
+
+npm install express mysql2 cors bcrypt

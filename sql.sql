@@ -14,6 +14,8 @@ CREATE TABLE users (
 CREATE TABLE evenement (
     idevent INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(255) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    image VARCHAR(255),
     date_debut DATE NOT NULL,
     date_fin DATE NOT NULL
 );
@@ -42,10 +44,10 @@ INSERT INTO users (nom, mail) VALUES
 ('Bruno Martin', 'bruno@example.com'),
 ('Claire Petit', 'claire@example.com');
 
-INSERT INTO evenement (nom, date_debut, date_fin) VALUES
-('Soirée cinéma', '2026-07-10', '2026-07-10'),
-('Atelier web', '2026-08-01', '2026-08-03'),
-('Conférence tech', '2026-09-15', '2026-09-15');
+INSERT INTO evenement (nom, type, image, date_debut, date_fin) VALUES
+('Soirée cinéma', 'film', NULL, '2026-07-10', '2026-07-10'),
+('Atelier web', 'informatique', 'test.jpg', '2026-08-01', '2026-08-03'),
+('Conférence tech', 'informatique', NULL, '2026-09-15', '2026-09-15');
 
 INSERT INTO prestataire (login, mdp, mail, acces, idevent) VALUES
 ('max', 'mdp', 'max@example.com', 'orga', 1),
