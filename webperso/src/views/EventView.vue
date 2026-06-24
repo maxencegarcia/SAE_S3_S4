@@ -21,20 +21,35 @@ const image = {
   'informatique': '/src/assets/informatique.jpg', 
   'film': '/src/assets/film.jpeg'
 }
+// c'est pour le chgangement d'image au click
+const idimcli = ref(null)
 
 function getimage(ev) {
-  if (ev.image!= null) {
-    return '/src/assets/' + ev.image
+  if (idimcli.value != ev.idevent) {
+    if (ev.image!= null) {
+      return '/src/assets/' + ev.image
+    }
+    return image[ev.type]
   }
-  return image[ev.type]
+  else{
+    return '/src/assets/' + ev.plan
+  }
+}
+
+function plan(ev){
+  if (idimcli.value == ev.idevent) {
+    idimcli.value = null
+  }
+  else{ idimcli.value = ev.idevent }
 }
 </script>
 
 <template>
   <ul>
-    <li v-for="ev in evenements" :key="ev.idevent">
-      {{ ev.nom }} — <span :class="statut(ev)">{{ statut(ev) }}</span>
-      <img :src="getimage(ev)" :alt="ev.nom">
+    <li v-for="ev in evenements" :key="ev.idevent" style="list-style: none;">
+      {{ ev.nom }} — <span :class="statut(ev)">{{ statut(ev) }}</span> <br>
+      <img :src="getimage(ev)" :alt="ev.nom" style="height: 400px; width: 1000px; cursor: pointer;" @click="plan(ev)"><br>
+      {{ ev.description }} <br> <br> <br> <br>
     </li>
   </ul>
 </template>

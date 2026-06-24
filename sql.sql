@@ -16,6 +16,8 @@ CREATE TABLE evenement (
     nom VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     image VARCHAR(255),
+    plan VARCHAR(255) NOT NULL,
+    description TEXT,
     date_debut DATE NOT NULL,
     date_fin DATE NOT NULL
 );
@@ -44,10 +46,10 @@ INSERT INTO users (nom, mail) VALUES
 ('Bruno Martin', 'bruno@example.com'),
 ('Claire Petit', 'claire@example.com');
 
-INSERT INTO evenement (nom, type, image, date_debut, date_fin) VALUES
-('Soirée cinéma', 'film', NULL, '2026-07-10', '2026-07-10'),
-('Atelier web', 'informatique', 'test.jpg', '2026-08-01', '2026-08-03'),
-('Conférence tech', 'informatique', NULL, '2026-09-15', '2026-09-15');
+INSERT INTO evenement (nom, type, image, plan, description, date_debut, date_fin) VALUES
+('Soirée cinéma', 'film', NULL, 'cinamaplan.jpg', 'une soirée cool pour voir des film sympatique pour pas tres chère', '2026-07-10', '2026-07-10'),
+('Atelier web', 'informatique', 'test.jpg', 'concertplan.jpg', 'Atelier de création web', '2026-08-01', '2026-08-03'),
+('Conférence tech', 'informatique', NULL, 'techplan.jpg', 'Conférence sur les dernières technologies', '2026-09-15', '2026-09-15');
 
 INSERT INTO prestataire (login, mdp, mail, acces, idevent) VALUES
 ('max', 'mdp', 'max@example.com', 'orga', 1),

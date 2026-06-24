@@ -26,6 +26,7 @@
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 0.85rem 1rem;
   background: #ffffff;
