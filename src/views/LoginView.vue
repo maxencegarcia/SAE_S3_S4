@@ -40,6 +40,7 @@ async function seConnecter() {
       return
     }
 
+    localStorage.setItem('user', JSON.stringify(data.user))
     router.push('/presta')
   } catch (e) {
     erreur.value = 'Erreur de connexion au serveur'

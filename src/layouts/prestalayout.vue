@@ -4,7 +4,7 @@
       <li><router-link to="/presta">Accueil</router-link></li>
       <li><input type="search" placeholder="Rechercher…"></li>
       <li>
-        <router-link to="/">Disconect</router-link>
+        <li><a href="#" @click.prevent="deconnexion">Disconect</a></li>
       </li>
     </ul>
 
@@ -64,3 +64,13 @@
   display: none;
 }
 </style>
+
+<script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+function deconnexion() {
+  localStorage.removeItem('user')
+  router.push('/')
+}
+</script>

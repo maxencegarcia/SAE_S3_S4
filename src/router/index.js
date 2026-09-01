@@ -49,4 +49,13 @@ const router = createRouter({
     ]
 })
 
+router.beforeEach((to) => {
+  const isPresta = to.path.startsWith('/presta')
+  const user = localStorage.getItem('user')
+
+  if (isPresta && !user) {
+    return '/login'
+  }
+})
+
 export default router
