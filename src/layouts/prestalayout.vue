@@ -3,9 +3,7 @@
     <ul class="navbar">
       <li><router-link to="/presta">Accueil</router-link></li>
       <li><input type="search" placeholder="Rechercher…"></li>
-      <li>
-        <li><a href="#" @click.prevent="deconnexion">Disconect</a></li>
-      </li>
+      <li><a href="#" @click.prevent="deconnexion">Disconect</a></li>
     </ul>
 
     <main class="page-main">

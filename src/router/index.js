@@ -8,6 +8,7 @@ import Defaultlayout from '../layouts/Defaultlayout.vue'
 import Prestalayout from '../layouts/prestalayout.vue'
 import EventView from '../views/EventView.vue'
 import OrgaView from '../views/OrgaView.vue'
+import Orgalayout from '../layouts/Orgalayout.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -42,7 +43,7 @@ const router = createRouter({
         },
         {
             path: '/orga',
-            component: Prestalayout,
+            component: Orgalayout,
             children: [
                 { path: '', component: OrgaView}
             ]
@@ -66,19 +67,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const isPresta = to.path.startsWith('/presta')
-  const user = localStorage.getItem('user')
+  const user = JSON.parse(localStorage.getItem('user') || 'null')
 
-  if (isPresta && !user) {
+  if (to.path.startsWith('/presta') && user?.role !== 'presta') {
     return '/login'
   }
-})
-
-router.beforeEach((to) => {
-  const isorga = to.path.startsWith('/orga')
-  const user = localStorage.getItem('user')
-
-  if (isorga && !user) {
+  if (to.path.startsWith('/orga') && user?.role !== 'orga') {
     return '/login'
   }
 })

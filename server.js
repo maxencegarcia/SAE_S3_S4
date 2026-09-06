@@ -27,7 +27,7 @@ app.post('/api/login', async (req, res) => {
   if (!(await bcrypt.compare(password, user.mdp))) {
     return res.status(401).json({ message: 'Identifiants incorrects' })
   }
-  res.json({ message: 'Connecté', user: { id: user.IDpresta, login: user.login} })
+  res.json({ message: 'Connecté', user: { id: user.IDpresta, login: user.login, role: 'presta' } })
 })
 
 app.post('/api/loginorga', async (req, res) => {
@@ -43,7 +43,7 @@ app.post('/api/loginorga', async (req, res) => {
   if (!(await bcrypt.compare(password, user.mdp))) {
     return res.status(401).json({ message: 'Identifiants incorrects' })
   }
-  res.json({ message: 'Connecté', user: { id: user.IDorga, login: user.login } })
+  res.json({ message: 'Connecté', user: { id: user.IDorga, login: user.login, role: 'orga' } })
 })
 
 app.get('/api/event', async (req, res) => {
