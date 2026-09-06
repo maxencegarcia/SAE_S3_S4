@@ -1,0 +1,3 @@
+<template>
+  orga caca
+</template>

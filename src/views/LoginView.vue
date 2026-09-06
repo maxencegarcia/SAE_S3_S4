@@ -3,6 +3,14 @@
     <h2>Connexion</h2>
     <p>Veuillez vous connecter</p>
 
+     <div class="tabs">
+      <RouterLink to="/login" class="tab tab-active">
+        Je suis prestataire
+      </RouterLink>
+      <RouterLink to="/loginorga" class="tab">
+        Je suis organisateur
+      </RouterLink>
+    </div>
     <p v-if="erreur" style="color: red; font-size: 13px;">{{ erreur }}</p>
 
     <label>Login
@@ -47,3 +55,36 @@ async function seConnecter() {
   }
 }
 </script>
+
+<style scoped>
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #e5e5e5;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab:hover {
+  color: #333;
+}
+
+.tab-active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+  font-weight: 600;
+}
+
+</style>

@@ -41,5 +41,10 @@ found 0 vulnerabilities
 
 
 node server.js
+npm run build
+npm run dev
+
+
+
 
 npm install express mysql2 cors bcrypt

@@ -24,10 +24,26 @@ app.post('/api/login', async (req, res) => {
     return res.status(401).json({ message: 'Identifiants incorrects' })
   }
   const user = rows[0]
-  if (password !== user.mdp) {
+  if (!(await bcrypt.compare(password, user.mdp))) {
     return res.status(401).json({ message: 'Identifiants incorrects' })
   }
-  res.json({ message: 'Connecté', user: { id: user.IDpresta, login: user.login, acces: user.acces } })
+  res.json({ message: 'Connecté', user: { id: user.IDpresta, login: user.login} })
+})
+
+app.post('/api/loginorga', async (req, res) => {
+  const { login, password } = req.body
+  const [rows] = await db.execute(
+    'SELECT * FROM organisateur WHERE login = ?', [login]
+  )
+  if (rows.length === 0) {
+    return res.status(401).json({ message: 'Identifiants incorrects' })
+  }
+  const user = rows[0]
+  // password !== user.mdp
+  if (!(await bcrypt.compare(password, user.mdp))) {
+    return res.status(401).json({ message: 'Identifiants incorrects' })
+  }
+  res.json({ message: 'Connecté', user: { id: user.IDorga, login: user.login } })
 })
 
 app.get('/api/event', async (req, res) => {
