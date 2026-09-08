@@ -1,4 +1,5 @@
-
+npm run build
+npm run dev
 node server.js
 
 npm install express mysql2 cors bcrypt
