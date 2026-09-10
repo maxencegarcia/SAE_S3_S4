@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { evenements as evenementsData } from '../data/datalogin'
 
 const evenements = ref([])
 
@@ -12,15 +13,25 @@ function statut(ev) {
   return 'en cours'
 }
 
-onMounted(async () => {
-  const res = await fetch('http://localhost:3000/api/event')
-  evenements.value = await res.json()
+
+// conexion bdd peut etre ne jamais la remettre je ne sais pas trop a voir parce c'est plus pratique mais en meme temp 
+// la syntaxe js est immonde
+// peut etre supprimere ce message aussi
+
+// onMounted(async () => {
+//   const res = await fetch('http://localhost:3000/api/event')
+//   evenements.value = await res.json()
+// })
+
+onMounted(() => {
+  evenements.value = evenementsData
 })
 
 const image = {
   'informatique': '/src/assets/informatique.jpg', 
   'film': '/src/assets/film.jpeg'
 }
+
 // c'est pour le chgangement d'image au click
 const idimcli = ref(null)
 

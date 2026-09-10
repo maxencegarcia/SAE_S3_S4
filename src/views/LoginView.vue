@@ -24,6 +24,7 @@
 </template>
 
 <script setup>
+import { prestataire }  from '../data/datalogin'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -34,25 +35,40 @@ const router = useRouter()
 
 async function seConnecter() {
   erreur.value = ''
-  try {
-    const res = await fetch('http://localhost:3000/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login: login.value, password: password.value })
-    })
+  //login tempo s3
 
-    const data = await res.json()
+  const user = prestataire.find(p => p.login === login.value && p.password == password.value)
 
-    if (!res.ok) {
-      erreur.value = data.message
-      return
-    }
-
-    localStorage.setItem('user', JSON.stringify(data.user))
-    router.push('/presta')
-  } catch (e) {
-    erreur.value = 'Erreur de connexion au serveur'
+  if (!user) {
+    erreur.value = 'identifiant incorect'
+    return
   }
+  localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
+  router.push('/presta')
+
+
+
+  // Pour apres login api
+
+  // try {
+  //   const res = await fetch('http://localhost:3000/api/login', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ login: login.value, password: password.value })
+  //   })
+
+  //   const data = await res.json()
+
+  //   if (!res.ok) {
+  //     erreur.value = data.message
+  //     return
+  //   }
+
+  //   localStorage.setItem('user', JSON.stringify(data.user))
+  //   router.push('/presta')
+  // } catch (e) {
+  //   erreur.value = 'Erreur de connexion au serveur'
+  // }
 }
 </script>
 

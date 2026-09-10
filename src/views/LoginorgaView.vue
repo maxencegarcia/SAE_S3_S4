@@ -25,6 +25,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { orga }  from '../data/datalogin'
 import { useRouter } from 'vue-router'
 
 const login = ref('')
@@ -34,25 +35,40 @@ const router = useRouter()
 
 async function seConnecter() {
   erreur.value = ''
-  try {
-    const res = await fetch('http://localhost:3000/api/loginorga', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login: login.value, password: password.value })
-    })
 
-    const data = await res.json()
+  //login tempo s3
 
-    if (!res.ok) {
-      erreur.value = data.message
-      return
-    }
+  const user = orga.find(o => o.login === login.value && o.password == password.value)
 
-    localStorage.setItem('user', JSON.stringify(data.user))
-    router.push('/orga')
-  } catch (e) {
-    erreur.value = 'Erreur de connexion au serveur'
+  if (!user) {
+    erreur.value = 'identifiant incorect'
+    return
   }
+  localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
+  router.push('/orga')
+
+
+  // login pour apres juste decommenté et NORMALEMENT c'est bon
+
+  // try {
+  //   const res = await fetch('http://localhost:3000/api/loginorga', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ login: login.value, password: password.value })
+  //   })
+
+  //   const data = await res.json()
+
+  //   if (!res.ok) {
+  //     erreur.value = data.message
+  //     return
+  //   }
+
+  //   localStorage.setItem('user', JSON.stringify(data.user))
+  //   router.push('/orga')
+  // } catch (e) {
+  //   erreur.value = 'Erreur de connexion au serveur'
+  // }
 }
 </script>
 
