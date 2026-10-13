@@ -29,7 +29,7 @@ onMounted(() => {
 
 const image = {
   'informatique': '/src/assets/informatique.jpg', 
-  'film': '/src/assets/film.jpeg'
+  'test': '/src/assets/test.png'
 }
 
 // c'est pour le chgangement d'image au click
