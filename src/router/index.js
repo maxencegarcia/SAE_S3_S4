@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
-import LoginorgaView from '../views/LoginorgaView.vue'
 import PrestatView from '../views/PrestatView.vue'
 import Defaultlayout from '../layouts/Defaultlayout.vue'
 import Prestalayout from '../layouts/prestalayout.vue'
@@ -32,13 +31,6 @@ const router = createRouter({
             component: Defaultlayout,
             children: [
                 { path: '', component: LoginView}
-            ]
-        },
-        {
-            path: '/loginorga',
-            component: Defaultlayout,
-            children: [
-                { path: '', component: LoginorgaView}
             ]
         },
         {

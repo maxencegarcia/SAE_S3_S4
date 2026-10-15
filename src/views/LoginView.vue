@@ -3,14 +3,14 @@
     <h2>Connexion</h2>
     <p>Veuillez vous connecter</p>
 
-     <div class="tabs">
-      <RouterLink to="/login" class="tab tab-active">
-        Je suis prestataire
-      </RouterLink>
-      <RouterLink to="/loginorga" class="tab">
-        Je suis organisateur
-      </RouterLink>
-    </div>
+<!--     <div class="tabs">-->
+<!--      <RouterLink to="/login" class="tab tab-active">-->
+<!--        Je suis prestataire-->
+<!--      </RouterLink>-->
+<!--      <RouterLink to="/loginorga" class="tab">-->
+<!--        Je suis organisateur-->
+<!--      </RouterLink>-->
+<!--    </div>-->
     <p v-if="erreur" style="color: red; font-size: 13px;">{{ erreur }}</p>
 
     <label>Login
@@ -24,9 +24,10 @@
 </template>
 
 <script setup>
-import { prestataire }  from '../data/datalogin'
+
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import UserService from "../services/user.service.js";
 
 const login = ref('')
 const password = ref('')
@@ -34,18 +35,30 @@ const erreur = ref('')
 const router = useRouter()
 
 async function seConnecter() {
-  erreur.value = ''
   //login tempo s3
+  //
+  // const user = utilisateurs.find(p => p.login === login.value && p.password == password.value)
+  //
+  // if (!user) {
+  //   erreur.value = 'identifiant incorect'
+  //   return
+  // }
+  // localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
+  // router.push('/presta')
 
-  const user = prestataire.find(p => p.login === login.value && p.password == password.value)
 
-  if (!user) {
-    erreur.value = 'identifiant incorect'
-    return
+  const result = UserService.getUserFromLocalSource(login.value, password.value);
+  if (result==null) {
+    return null;
   }
+  const user = result.datas;
   localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
-  router.push('/presta')
-
+  if (user.role === "presta") {
+    router.push('/presta')
+  }
+  else {
+    router.push('/orga')
+  }
 
 
   // Pour apres login api
