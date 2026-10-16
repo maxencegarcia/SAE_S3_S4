@@ -8,6 +8,8 @@ import Prestalayout from '../layouts/prestalayout.vue'
 import EventView from '../views/EventView.vue'
 import OrgaView from '../views/OrgaView.vue'
 import Orgalayout from '../layouts/Orgalayout.vue'
+import OrgaPrestationView from "../views/OrgaPrestationView.vue";
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -41,12 +43,21 @@ const router = createRouter({
             ]
         },
         {
+          path : '/orga/prestations',
+          component: Orgalayout,
+            children : [
+                {path : '', component : OrgaPrestationView}
+            ]
+        },
+
+        {
             path: '/presta',
             component: Prestalayout,
             children: [
                 { path: '', component: PrestatView}
             ]
         }
+
         // {
         //     path: '/login',
         //     component: LoginView

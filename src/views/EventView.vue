@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { evenements as evenementsData } from '../data/datalogin'
+import { prestations as evenementsData } from '../data/usersDatas.js'
 
 const evenements = ref([])
 

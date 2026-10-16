@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import { evenements, participe } from '../data/datalogin'
+import { prestations, participe } from '../data/usersDatas.js'
 // import {json} from "express";
 
 const user = JSON.parse(localStorage.getItem('user') || 'null')
@@ -9,7 +9,7 @@ const eventdupresta = computed(() => {
   const ids = participe
       .filter(p => p.id === Number(user.id))
       .map(p => p.idevent)
-      return evenements.filter(ev => ids.includes(ev.idevent))
+      return prestations.filter(ev => ids.includes(ev.idevent))
 })
 
 

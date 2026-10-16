@@ -34,6 +34,9 @@ const password = ref('')
 const erreur = ref('')
 const router = useRouter()
 
+
+
+
 async function seConnecter() {
   //login tempo s3
   //
@@ -48,8 +51,9 @@ async function seConnecter() {
 
 
   const result = UserService.getUserFromLocalSource(login.value, password.value);
-  if (result==null) {
-    return null;
+  if (result.error!=0 || result.status!=200) {
+    erreur.value= result.datas;
+    return;
   }
   const user = result.datas;
   localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))

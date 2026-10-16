@@ -3,7 +3,8 @@
     <ul class="navbar">
       <li><router-link to="/orga">Accueil</router-link></li>
       <li><input type="search" placeholder="Rechercher…"></li>
-      <li><a href="#" @click.prevent="deconnexion">Disconect</a></li>
+      <li><a href="#" @click.prevent="deconnexion">Deconnexion</a></li>
+      <li> <router-link to="/orga/prestations"> Vue des prestations </router-link> </li>
     </ul>
 
     <main class="page-main">
