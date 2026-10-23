@@ -18,7 +18,8 @@ const eventdupresta = computed(() => {
   <div class="presta-page">
     <div class="presta-header">
       <h2>Page prestataire</h2>
-      <input type="button" value="ajouter une prestation" class="btn-primary">
+      <router-link to="/presta/addprestation"><input type="button" value="ajouter une prestation" class="btn-primary"></router-link>
+
     </div>
 
     <p v-if="eventdupresta.length === 0" class="presta-vide">

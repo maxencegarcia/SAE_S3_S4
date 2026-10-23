@@ -38,8 +38,9 @@ export async function ajouterPrestation({ service, dateHeure, idEmplacement }) {
     listePrestations.push(nouvelle)
     return nouvelle
 }
-
+/*
 export async function getMesPrestations() {
     const user = exigerRole('presta')
     return listePrestations.filter(p => p.idPresta === user.id)
 }
+ */

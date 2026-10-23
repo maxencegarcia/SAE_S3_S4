@@ -6,6 +6,7 @@ import PrestatView from '../views/PrestatView.vue'
 import Defaultlayout from '../layouts/Defaultlayout.vue'
 import Prestalayout from '../layouts/prestalayout.vue'
 import EventView from '../views/EventView.vue'
+import Addpresta from '../views/AddPrestaView.vue'
 import OrgaView from '../views/OrgaView.vue'
 import Orgalayout from '../layouts/Orgalayout.vue'
 import OrgaPrestationView from "../views/OrgaPrestationView.vue";
@@ -49,7 +50,13 @@ const router = createRouter({
                 {path : '', component : OrgaPrestationView}
             ]
         },
-
+        {
+            path : '/presta/addprestation',
+            component: Prestalayout,
+            children : [
+                {path : '', component : Addpresta}
+            ]
+        },
         {
             path: '/presta',
             component: Prestalayout,
