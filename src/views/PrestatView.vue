@@ -1,19 +1,26 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { prestations, participe } from '../data/usersDatas.js'
-// import {json} from "express";
+import { ref, onMounted } from 'vue'
+import { getMesPrestations, getEmplacements } from '../services/Localsource.prestation.service.js'
 
-const user = JSON.parse(localStorage.getItem('user') || 'null')
-const eventdupresta = computed(() => {
-  if (!user) return []
-  const ids = participe
-      .filter(p => p.id === Number(user.id))
-      .map(p => p.idevent)
-      return prestations.filter(ev => ids.includes(ev.idevent))
+const eventdupresta = ref([])
+const emplacements = ref([])
+const erreur = ref('')
+
+onMounted(async () => {
+  const resPrestations = await getMesPrestations()
+  if (resPrestations.error) { erreur.value = resPrestations.datas; return }
+  eventdupresta.value = resPrestations.datas
+
+  const resEmplacements = await getEmplacements()
+  if (!resEmplacements.error) emplacements.value = resEmplacements.datas
 })
 
-
+function nomEmplacement(id) {
+  const e = emplacements.value.find(e => e.id === id)
+  return e ? e.nom : 'inconnu'
+}
 </script>
+
 <template>
   <div class="presta-page">
     <div class="presta-header">
@@ -21,7 +28,7 @@ const eventdupresta = computed(() => {
       <router-link to="/presta/addprestation"><input type="button" value="ajouter une prestation" class="btn-primary"></router-link>
 
     </div>
-
+    <p v-if="erreur" style="color: red">{{ erreur }}</p>
     <p v-if="eventdupresta.length === 0" class="presta-vide">
       Vous ne participez à aucun événement pour le moment.
     </p>
@@ -32,7 +39,10 @@ const eventdupresta = computed(() => {
         <p class="presta-dates">
           {{ ev.date_debut }}<span v-if="ev.date_fin !== ev.date_debut"> → {{ ev.date_fin }}</span>
         </p>
+        <p>Créneau : {{ ev.creneau }}</p>
+        <p>Emplacement : {{ nomEmplacement(ev.idEmplacement) }}</p>
         <p>{{ ev.description }}</p>
+        <p>Statut : {{ ev.statut }}</p>
       </li>
     </ul>
   </div>
