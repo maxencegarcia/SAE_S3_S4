@@ -10,6 +10,7 @@ import Addpresta from '../views/AddPrestaView.vue'
 import OrgaView from '../views/OrgaView.vue'
 import Orgalayout from '../layouts/Orgalayout.vue'
 import OrgaPrestationView from "../views/OrgaPrestationView.vue";
+import RegisterView from "../views/RegisterView.vue";
 
 
 const router = createRouter({
@@ -34,6 +35,13 @@ const router = createRouter({
             component: Defaultlayout,
             children: [
                 { path: '', component: LoginView}
+            ]
+        },
+        {
+            path: '/register',
+            component: Defaultlayout,
+            children: [
+                { path: '', component: RegisterView}
             ]
         },
         {

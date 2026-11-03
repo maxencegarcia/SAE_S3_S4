@@ -4,6 +4,11 @@ function getUserFromLocalSource(login, password) {
 }
 
 
+function checkUserFromLocalSource(login, password, role) {
+    return Localsource.checkUser(login, password, role)
+}
+
+
 export default {
-    getUserFromLocalSource
+    getUserFromLocalSource, checkUserFromLocalSource
 }

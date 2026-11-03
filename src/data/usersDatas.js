@@ -2,11 +2,13 @@
 
 
 export const utilisateurs = [
-    {login: 'orga', password: 'mdp', id: '1', role: 'orga'},
+    {login: 'orga', password: 'mdp', id: '0', role: 'orga'},
     {login: 'orgaadmin', password: 'admin123', id: '2', role: 'orga'},
     {login: 'presta', password: 'mdp', id: '1', role: 'presta'},
-    {login: 'webdev', password: 'webdev123', id: '2', role: 'presta'}
+    {login: 'webdev', password: 'webdev123', id: '3', role: 'presta'}
 ]
+//verifier ici il y avait un prbleme d'id
+// normalement j'ai verif et c'est bon mais je laisse le com au cas ou
 
 
 
