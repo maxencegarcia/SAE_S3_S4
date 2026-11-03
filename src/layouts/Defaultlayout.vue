@@ -1,3 +1,5 @@
+<script setup>
+</script>
 <template>
   <div class="app-shell">
     <ul class="navbar">
@@ -5,6 +7,7 @@
       <li><input type="search" placeholder="Rechercher…"></li>
       <li>
         <router-link to="/login">Login</router-link>
+        <router-link to="/register">Register</router-link>
         <!-- <ul class="dropdown">
           <li>Register</li>
         </ul> -->
