@@ -30,6 +30,10 @@ export async function getEmplacements() {
     return ok(emplacements)
 }
 
+export async function getPrestations() {
+    return ok([...listePrestations]);
+}
+
 export async function getMesPrestations() {
     const user = exigerRole('presta')
     if (!user) return erreur(403, 'Accès refusé')
@@ -67,3 +71,33 @@ export async function ajouterPrestation({ nom, type, date, creneau, idEmplacemen
 
     return ok({ idevent })
 }
+
+function supprimerPrestationOccurenceFromParticipe(id) {
+    let i=0;
+    while (i<participe.length) {
+        if (participe[i].idevent===id) {
+            participe.splice(i, 1);
+        }
+        else {
+            i++;
+        }
+    }
+}
+export async function supprimerPrestation(id) {
+    for (let i=0; i<listePrestations.length; i++) {
+        if (listePrestations[i].idevent===id) {
+            listePrestations.splice(i,1);
+            supprimerPrestationOccurenceFromParticipe(id);
+            return ok("Prestation supprimée");
+        }
+    }
+    return erreur(404, "Prestation inexistante");
+}
+
+
+export default {
+    getPrestations,
+    getMesPrestations,
+    ajouterPrestation,
+    supprimerPrestation
+};
