@@ -1,4 +1,5 @@
 import { utilisateurs } from "../data/usersDatas.js";
+import { pendingrequest } from "../data/usersDatas.js";
 import router from "../router/index.js";
 
 function getUser(login, password) {
@@ -14,7 +15,7 @@ function getUser(login, password) {
     }
     return  error_res;
 }
-function checkUser(login, password, role) {
+function checkUser(login, password, role, redirect) {
     let error_res=   {error : 1 , status : 404, datas : "Login deja existant impossible de creer des doublon" };
     let id = 0;
     for (let i=0; i<utilisateurs.length; i++) {
@@ -26,17 +27,31 @@ function checkUser(login, password, role) {
     }
     console.log(id);
     id ++;
-    addUser(login, password, role, id);
-    router.push('/login')
+    addUser(login, password, role, id, redirect);
+    console.log("pas boucle");
+    if (redirect === "1"){
+        console.log("boucle");
+        router.push('/login')
+    }
     return  { error : 0, status : 200 ,datas : "login disponible" };
 }
 
-function addUser(login, password, role, id) {
+function addUser(login, password, role, id, redirect) {
     const user = {login, password, id, role};
-    utilisateurs.push(user);
+    if(role === "presta" && redirect === "1"){
+        pendingrequest.value.push(user);
+    }else{
+        utilisateurs.push(user);
+    }
     return { error: 0, status: 201, datas: user }
+}
+function removeUserpending(id) {
+    const index = pendingrequest.value.findIndex(u => u.id === id);
+    if(index>-1){
+        pendingrequest.value.splice(index, 1);
+    }
 }
 
 export default {
-    getUser, checkUser, addUser
+    getUser, checkUser, addUser, removeUserpending
 }

@@ -7,14 +7,13 @@
       </div>
 
       <div class="hero-heading">
-        <h1 class="hero-title">La manif des<br><em>gens civilisé</em></h1>
-        <p class="hero-sub">Sous-entendu, pas pour tous.</p>
+        <h1 class="hero-title">Game Award<br><em>Édition 2026</em></h1>
+        <p class="hero-sub">l'excellence du jeu vidéo</p>
       </div>
 
       <div class="hero-bottom">
         <p class="hero-desc">
-          Un site qui présente, de manière générale, les événements organisés —
-          dates, lieux, descriptions.
+          Découvrez les jeux qui ont marqué l'année, les talents qui les ont façonnés et les récompenses qui célèbrent le meilleur de l'industrie vidéoludique.
         </p>
         <RouterLink to="/event" class="hero-btn">
           Accéder aux événements

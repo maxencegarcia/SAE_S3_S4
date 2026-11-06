@@ -10,6 +10,7 @@ import Addpresta from '../views/AddPrestaView.vue'
 import OrgaView from '../views/OrgaView.vue'
 import Orgalayout from '../layouts/Orgalayout.vue'
 import OrgaPrestationView from "../views/OrgaPrestationView.vue";
+import Requestnewprestataire from "../views/Requestnewprestataire.vue";
 import RegisterView from "../views/RegisterView.vue";
 
 
@@ -56,6 +57,13 @@ const router = createRouter({
           component: Orgalayout,
             children : [
                 {path : '', component : OrgaPrestationView}
+            ]
+        },
+        {
+            path : '/orga/demandeprestataires',
+            component: Orgalayout,
+            children : [
+                {path : '', component : Requestnewprestataire}
             ]
         },
         {

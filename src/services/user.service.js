@@ -4,11 +4,14 @@ function getUserFromLocalSource(login, password) {
 }
 
 
-function checkUserFromLocalSource(login, password, role) {
-    return Localsource.checkUser(login, password, role)
+function checkUserFromLocalSource(login, password, role, redirect = "1") {
+    return Localsource.checkUser(login, password, role, redirect);
 }
 
+function RemoveUserPendingRequestFromLocalSource(id){
+    return Localsource.removeUserpending(id);
+}
 
 export default {
-    getUserFromLocalSource, checkUserFromLocalSource
+    getUserFromLocalSource, checkUserFromLocalSource, RemoveUserPendingRequestFromLocalSource
 }
