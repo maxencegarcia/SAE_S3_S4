@@ -5,10 +5,10 @@
 
     <p v-if="erreur" style="color: red; font-size: 13px;">{{ erreur }}</p>
 
-    <label>Définisser votre login
+    <label>Définissez votre login
       <input type="text" v-model="login">
     </label>
-    <label>Définisser votre password
+    <label>Définissez votre password
       <input type="password" v-model="password">
     </label>
     <label>
@@ -18,7 +18,7 @@
         <option value="orga">organisateur</option>
       </select>
     </label>
-    <input type="button" value="Confirmer" @click="enregistrer">
+    <input type="button" value="Confirmer" @click="register">
   </div>
 </template>
 
@@ -37,15 +37,16 @@ const router = useRouter()
 // pour info les nouveaux login sont supprimé quand on redemarre le serveur il faudrait regler cela pour la partie sql
 
 
-async function enregistrer() {
+async function register() {
   if(login.value === "" || password.value === "") {
     erreur.value = "les login et mot de passe sont obligatoire"
     return;
   }
 
+
   const result = UserService.checkUserFromLocalSource(login.value, password.value, role.value);
   if (result.error!==0 ) { // || result.status==200
-    erreur.value= result.datas ;
+    erreur.value= result.data ;
     return;
   }
 

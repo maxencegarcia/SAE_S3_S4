@@ -12,6 +12,14 @@ function RemoveUserPendingRequestFromLocalSource(id){
     return Localsource.removeUserpending(id);
 }
 
+function addUserFromLocalSource(login, password, role) {
+    return Localsource.addUser(login, password, role);
+}
+
+function addUser(login, password, role, id) {
+    return addUserFromLocalSource(login, password, role, id);
+}
+
 export default {
     getUserFromLocalSource, checkUserFromLocalSource, RemoveUserPendingRequestFromLocalSource
 }

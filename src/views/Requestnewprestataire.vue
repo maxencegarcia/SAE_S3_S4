@@ -5,8 +5,8 @@
     <h2>Prestations</h2>
     <li v-for="p in prestataire" :key="p.id" class="carte">
       <span class="login">{{ p.login }}</span>
-      <button @click="accepter(p.login, p.password, p.role, p.id)"> accepter </button>
-      <button @click="refuser(p.id)"> refuser </button>
+      <button @click="accept(p.login, p.password, p.role, p.id)"> accepter </button>
+      <button @click="reject(p.id)"> refuser </button>
       <!-- <span class="badge">{{ p.role }}</span> --->
     </li>
   </section>
@@ -25,13 +25,11 @@ import UserService from "../services/user.service.js";
 
 const prestataire = computed(() => pendingrequest.value.filter(u => u.role==="presta"))
 
-async function accepter(login, password, role, id){
-  UserService.checkUserFromLocalSource(login, password, role, "0");
+async function accept(login, password, role, id){
   UserService.RemoveUserPendingRequestFromLocalSource(id);
 }
-async function refuser(id){
+async function reject(id){
   UserService.RemoveUserPendingRequestFromLocalSource(id);
-
 }
 
 </script>

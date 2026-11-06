@@ -11,7 +11,7 @@
 <!--        Je suis organisateur-->
 <!--      </RouterLink>-->
 <!--    </div>-->
-    <p v-if="erreur" style="color: red; font-size: 13px;">{{ erreur }}</p>
+    <p v-if="errors" style="color: red; font-size: 13px;">{{ errors }}</p>
 
     <label>Login
       <input type="text" v-model="login">
@@ -19,7 +19,7 @@
     <label>Password
       <input type="password" v-model="password">
     </label>
-    <input type="button" value="Confirmer" @click="seConnecter">
+    <input type="button" value="Confirmer" @click="connexion">
   </div>
 </template>
 
@@ -31,13 +31,13 @@ import UserService from "../services/user.service.js";
 
 const login = ref('')
 const password = ref('')
-const erreur = ref('')
+const errors = ref('')
 const router = useRouter()
 
 
 
 
-async function seConnecter() {
+async function connexion() {
   //login tempo s3
   //
   // const user = utilisateurs.find(p => p.login === login.value && p.password == password.value)
@@ -48,20 +48,18 @@ async function seConnecter() {
   // }
   // localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
   // router.push('/presta')
-
-
-  const result = UserService.getUserFromLocalSource(login.value, password.value);
-  if (result.error!=0 || result.status!=200) {
-    erreur.value= result.datas;
-    return;
-  }
-  const user = result.datas;
-  localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
-  if (user.role === "presta") {
-    router.push('/presta')
-  }
-  else {
-    router.push('/orga')
+    const result = UserService.getUserFromLocalSource(login.value, password.value);
+    if (result.error!==0 || result.status!==200) {
+      errors.value= result.data;
+      return;
+    }
+    const user = result.data;
+    localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
+    if (user.role === "presta") {
+      router.push('/presta')
+    }
+    else {
+      router.push('/orga')
   }
 
 

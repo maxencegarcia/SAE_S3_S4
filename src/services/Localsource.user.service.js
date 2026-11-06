@@ -1,50 +1,53 @@
-import { utilisateurs } from "../data/usersDatas.js";
+
 import { pendingrequest } from "../data/usersDatas.js";
+import { users } from "../data/usersDatas.js";
 import router from "../router/index.js";
 
 function getUser(login, password) {
-    let error_res=   {error : 1 , status : 404, datas : "Login inexistant ou mot de passe incorrect" };
-    for (let i=0; i<utilisateurs.length; i++) {
-        let utilisateur = utilisateurs[i];
+    let error_res=   {error : 1 , status : 404, data : "Login inexistant ou mot de passe incorrect" };
+    for (let i=0; i<users.length; i++) {
+        let utilisateur = users[i];
         if (utilisateur.login===login) {
             return utilisateur.password===password
-                ?  { error : 0, status : 200 ,datas : {id: utilisateur.id, login: utilisateur.login, role: utilisateur.role} }
+                ?  { error : 0, status : 200 ,data : {id: utilisateur.id, login: utilisateur.login, role: utilisateur.role} }
                 : error_res;
 
         }
     }
     return  error_res;
 }
-function checkUser(login, password, role, redirect) {
-    let error_res=   {error : 1 , status : 404, datas : "Login deja existant impossible de creer des doublon" };
-    let id = 0;
-    for (let i=0; i<utilisateurs.length; i++) {
-        let utilisateur = utilisateurs[i];
+
+
+
+function searchUser(login) {
+    for (let i=0; i<users.length; i++) {
+        let utilisateur = users[i];
         if (utilisateur.login===login) {
-            return error_res;
+            return  { error : 0, status : 200 ,data : "Login déja existant0" };
         }
-        id ++;
     }
-    console.log(id);
-    id ++;
-    addUser(login, password, role, id, redirect);
-    console.log("pas boucle");
-    if (redirect === "1"){
-        console.log("boucle");
-        router.push('/login')
-    }
-    return  { error : 0, status : 200 ,datas : "login disponible" };
+    return {error : 1 , status : 404, data : "Utilisateur inexistant" };
 }
 
-function addUser(login, password, role, id, redirect) {
-    const user = {login, password, id, role};
-    if(role === "presta" && redirect === "1"){
-        pendingrequest.value.push(user);
-    }else{
-        utilisateurs.push(user);
+function addUser(login, password, role) {
+
+    if (searchUser(login)) {
+        return {error : 0, status: 409, data : "Un utilisateur avec ce login existe déja"}
     }
-    return { error: 0, status: 201, datas: user }
+
+    let id = users.length;
+
+    const user = {login, password,  role, id};
+    if (role==="presta") {
+        pendingrequest.value.push(user);
+        router.push('/login');
+    }
+    else {
+        users.push(user);
+    }
+    return { error: 0, status: 201, data: user }
 }
+
 function removeUserpending(id) {
     const index = pendingrequest.value.findIndex(u => u.id === id);
     if(index>-1){
@@ -53,5 +56,5 @@ function removeUserpending(id) {
 }
 
 export default {
-    getUser, checkUser, addUser, removeUserpending
+    getUser, checkUser: searchUser, addUser, removeUserpending
 }

@@ -1,9 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getEmplacements, ajouterPrestation } from '../services/Localsource.prestation.service.js'
+import { getLocations, addActivity } from '../../services/Localsource.activities.service.js'
 
 const router = useRouter()
+
+import {useActivitiesStore} from "../../store/activities.store.js";
+
+const activityStore = useActivitiesStore();
+
 
 const types = ['test', 'concour', 'présentation']
 const creneaux = ['10:00-11:00', '11:00-12:00', '14:00-15:00', '15:00-16:00']
@@ -17,9 +22,9 @@ const idEmplacement = ref('')
 const erreur = ref('')
 
 onMounted(async () => {
-  const res = await getEmplacements()
-  if (res.error) { erreur.value = res.datas; return }
-  emplacements.value = res.datas
+  const res = await getLocations()
+  if (res.error) { erreur.value = res.data; return }
+  emplacements.value = res.data
 })
 
 async function valider() {
@@ -29,14 +34,15 @@ async function valider() {
     return
   }
 
-  const res = await ajouterPrestation({
-    nom: nom.value,
+  await activityStore.addActivity({
+    name: nom.value,
     type: type.value,
     date: date.value,
-    creneau: creneau.value,
+    timeSlot: creneau.value,
     idEmplacement: idEmplacement.value
   })
-  if (res.error) { erreur.value = res.datas; return }
+  console.log(activityStore.providerActivities);
+
 
   router.push('/presta')
 }
@@ -73,7 +79,7 @@ async function valider() {
       <label>Emplacement
         <select v-model="idEmplacement">
           <option disabled value="">-- choisir --</option>
-          <option v-for="e in emplacements" :key="e.id" :value="e.id">{{ e.nom }}</option>
+          <option v-for="e in emplacements" :key="e.id" :value="e.id">{{ e.name }}</option>
         </select>
       </label>
 
