@@ -1,23 +1,24 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getMesPrestations, getEmplacements } from '../services/Localsource.prestation.service.js'
+import {storeToRefs} from "pinia";
+import { getLocations } from '../../services/Localsource.activities.service.js'
+import {activitiesStore} from "../../store/activities.store.js";
 
-const eventdupresta = ref([])
+const activityStore = activitiesStore();
+const { providerActivities} = storeToRefs(activityStore)
 const emplacements = ref([])
-const erreur = ref('')
+const error = ref('')
 
 onMounted(async () => {
-  const resPrestations = await getMesPrestations()
-  if (resPrestations.error) { erreur.value = resPrestations.datas; return }
-  eventdupresta.value = resPrestations.datas
-
-  const resEmplacements = await getEmplacements()
-  if (!resEmplacements.error) emplacements.value = resEmplacements.datas
+  await activityStore.loadProviderActivities();
+  const resEmplacements = await getLocations()
+  if (!resEmplacements.error) emplacements.value = resEmplacements.data
 })
 
 function nomEmplacement(id) {
+  console.log(id, emplacements)
   const e = emplacements.value.find(e => e.id === id)
-  return e ? e.nom : 'inconnu'
+  return e ? e.name : 'inconnu'
 }
 </script>
 
@@ -28,21 +29,21 @@ function nomEmplacement(id) {
       <router-link to="/presta/addprestation"><input type="button" value="ajouter une prestation" class="btn-primary"></router-link>
 
     </div>
-    <p v-if="erreur" style="color: red">{{ erreur }}</p>
-    <p v-if="eventdupresta.length === 0" class="presta-vide">
+    <p v-if="error" style="color: red">{{ error }}</p>
+    <p v-if="providerActivities.length === 0" class="presta-vide">
       Vous ne participez à aucun événement pour le moment.
     </p>
 
     <ul v-else class="presta-liste">
-      <li v-for="ev in eventdupresta" :key="ev.idevent" class="presta-carte">
-        <h3>{{ ev.nom }}</h3>
+      <li v-for="activity in providerActivities" :key="activity.id" class="presta-carte">
+        <h3>{{ activity.name }}</h3>
         <p class="presta-dates">
-          {{ ev.date_debut }}<span v-if="ev.date_fin !== ev.date_debut"> → {{ ev.date_fin }}</span>
+          {{ activity.startDate }}<span v-if="activity.endDate !== activity.startDate"> → {{ activity.endDate }}</span>
         </p>
-        <p>Créneau : {{ ev.creneau }}</p>
-        <p>Emplacement : {{ nomEmplacement(ev.idEmplacement) }}</p>
-        <p>{{ ev.description }}</p>
-        <p>Statut : {{ ev.statut }}</p>
+        <p>Créneau : {{ activity.timeSlot }}</p>
+        <p>Emplacement : {{ nomEmplacement(activity.locationId) }}</p>
+        <p>{{ activity.description }}</p>
+        <p>Statut : {{ activity.status }}</p>
       </li>
     </ul>
   </div>

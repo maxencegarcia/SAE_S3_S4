@@ -3,12 +3,12 @@
 import {onMounted} from 'vue'
 import { storeToRefs } from 'pinia'
 
-import {prestationsStore} from "../store/prestations.store.js"
+import {activitiesStore} from "../../store/activities.store.js"
 
 
-const prestStore = prestationsStore();
-const { prestations, erreur } = storeToRefs(prestStore);
-onMounted(() => prestStore.charger())
+const activityStore = activitiesStore();
+const { activities, errors } = storeToRefs(activityStore);
+onMounted(() => activityStore.loadActivities())
 
 </script>
 
@@ -20,18 +20,18 @@ onMounted(() => prestStore.charger())
     <h2>Prestations</h2>
     <ul class="presta-liste">
 
-      <li v-for="ev in prestations" :key="ev.idevent" class="presta-carte">
+      <li v-for="activity in activities" :key="activity.idevent" class="presta-carte">
         <div class ="content">
-          <h3>{{ ev.nom }}</h3>
+          <h3>{{ activity.name }}</h3>
           <p class="presta-dates">
-            {{ ev.date_debut }}<span v-if="ev.date_fin !== ev.date_debut"> → {{ ev.date_fin }}</span>
+            {{ activity.startDate }}<span v-if="activity.endDate !== activity.startDate"> → {{ activity.endDate }}</span>
           </p>
-          <p>Créneau : {{ ev.creneau }}</p>
-          <p>{{ ev.description }}</p>
+          <p>Créneau : {{ activity.timeSlot }}</p>
+          <p>{{ activity.description }}</p>
 
         </div>
         <div class="boutons">
-            <button @click="prestStore.supprimerPrestation(ev.idevent)" class="bouton-rouge">supprimer</button>
+            <button @click="activityStore.removeActivity(activity.id)" class="bouton-rouge">supprimer</button>
         </div>
       </li>
     </ul>

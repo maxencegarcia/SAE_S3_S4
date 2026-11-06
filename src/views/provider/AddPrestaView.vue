@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getEmplacements, ajouterPrestation } from '../services/Localsource.prestation.service.js'
+import { getLocations, addActivity } from '../../services/Localsource.activities.service.js'
 
 const router = useRouter()
 
@@ -17,7 +17,7 @@ const idEmplacement = ref('')
 const erreur = ref('')
 
 onMounted(async () => {
-  const res = await getEmplacements()
+  const res = await getLocations()
   if (res.error) { erreur.value = res.datas; return }
   emplacements.value = res.datas
 })
@@ -29,11 +29,11 @@ async function valider() {
     return
   }
 
-  const res = await ajouterPrestation({
-    nom: nom.value,
+  const res = await addActivity({
+    name: nom.value,
     type: type.value,
     date: date.value,
-    creneau: creneau.value,
+    timeSlot: creneau.value,
     idEmplacement: idEmplacement.value
   })
   if (res.error) { erreur.value = res.datas; return }

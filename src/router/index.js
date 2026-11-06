@@ -2,14 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
-import PrestatView from '../views/PrestatView.vue'
+import PrestatView from '../views/provider/ProviderView.vue'
 import Defaultlayout from '../layouts/Defaultlayout.vue'
 import Prestalayout from '../layouts/prestalayout.vue'
-import EventView from '../views/EventView.vue'
-import Addpresta from '../views/AddPrestaView.vue'
-import OrgaView from '../views/OrgaView.vue'
+import EventView from '../views/ActivitiesView.vue'
+import Addpresta from '../views/provider/AddPrestaView.vue'
+import OrgaView from '../views/organizer/OrganizerView.vue'
 import Orgalayout from '../layouts/Orgalayout.vue'
-import OrgaPrestationView from "../views/OrgaPrestationView.vue";
+import OrgaPrestationView from "../views/organizer/OrganizerActivitiesView.vue";
 import RegisterView from "../views/RegisterView.vue";
 
 
