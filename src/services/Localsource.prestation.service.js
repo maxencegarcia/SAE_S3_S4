@@ -96,6 +96,12 @@ export async function removePrestapending(id) {
         pendingprestation.value.splice(index, 1);
     }
 }
+export async function removePresta(id) {
+    const index = prestations.value.findIndex(u => u.idevent === id);
+    if(index>-1){
+        prestations.value.splice(index, 1);
+    }
+}
 
 export async function AcceptPrestation(idevent) {
     const user = exigerRole('orga')
