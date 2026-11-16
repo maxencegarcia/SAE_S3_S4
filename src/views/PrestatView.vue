@@ -25,7 +25,7 @@ function nomEmplacement(id) {
   <div class="presta-page">
     <div class="presta-header">
       <h2>Page prestataire</h2>
-      <router-link to="/presta/addprestation"><input type="button" value="ajouter une prestation" class="btn-primary"></router-link>
+<!--      <router-link to="/presta/addprestation"><input type="button" value="ajouter une prestation" class="btn-primary"></router-link>-->
 
     </div>
     <p v-if="erreur" style="color: red">{{ erreur }}</p>

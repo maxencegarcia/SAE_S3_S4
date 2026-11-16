@@ -10,6 +10,7 @@ import Addpresta from '../views/AddPrestaView.vue'
 import OrgaView from '../views/OrgaView.vue'
 import Orgalayout from '../layouts/Orgalayout.vue'
 import OrgaPrestationView from "../views/OrgaPrestationView.vue";
+import OrgaPendingPrestation from "../views/OrgaPendingPrestation.vue";
 import Requestnewprestataire from "../views/Requestnewprestataire.vue";
 import RegisterView from "../views/RegisterView.vue";
 
@@ -60,6 +61,13 @@ const router = createRouter({
             ]
         },
         {
+            path : '/orga/pendingprestations',
+            component: Orgalayout,
+            children : [
+                {path : '', component : OrgaPendingPrestation}
+            ]
+        },
+        {
             path : '/orga/demandeprestataires',
             component: Orgalayout,
             children : [
@@ -67,8 +75,8 @@ const router = createRouter({
             ]
         },
         {
-            path : '/presta/addprestation',
-            component: Prestalayout,
+            path : '/addprestation',
+            component: Defaultlayout,
             children : [
                 {path : '', component : Addpresta}
             ]

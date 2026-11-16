@@ -1,23 +1,18 @@
 <script setup>
-import {ref} from "vue"
-import {prestations} from "../data/usersDatas.js";
-import Orgalayout from "../layouts/Orgalayout.vue";
-
-let prestations_ref = ref(prestations)
-
+import { prestations } from "../data/usersDatas.js"
 </script>
 
-
 <template>
-
   <section>
     <h2>Prestations</h2>
-    <p> < Prestations : {{prestations_ref}} </p>
+    <p v-if="!prestations.length">Aucune prestation pour le moment.</p>
+    <article v-for="p in prestations" :key="p.idevent">
+      <h3>{{ p.nom }} <small>({{ p.type }})</small></h3>
+      <p>{{ p.description }}</p>
+      <p>{{ p.date_debut }} · {{ p.creneau }}</p>
+    </article>
   </section>
-
-
 </template>
-
 <style>
   section {
     display : flex;

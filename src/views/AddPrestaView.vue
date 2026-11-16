@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getEmplacements, ajouterPrestation } from '../services/Localsource.prestation.service.js'
+import { getEmplacements, ProposePrestation } from '../services/Localsource.prestation.service.js'
 
 const router = useRouter()
 
@@ -12,9 +12,12 @@ const emplacements = ref([])
 const nom = ref('')
 const type = ref('')
 const date = ref('')
+const nomprestataire = ref('')
+const email = ref('')
 const creneau = ref('')
 const idEmplacement = ref('')
 const erreur = ref('')
+const description = ref('')
 
 onMounted(async () => {
   const res = await getEmplacements()
@@ -24,21 +27,24 @@ onMounted(async () => {
 
 async function valider() {
   erreur.value = ''
-  if (!nom.value || !type.value || !date.value || !creneau.value || !idEmplacement.value) {
+  if (!nom.value || !type.value || !date.value || !creneau.value || !idEmplacement.value || !description.value) {
     erreur.value = 'Merci de remplir tous les champs'
     return
   }
 
-  const res = await ajouterPrestation({
+  const res = await ProposePrestation({
+    nomprestataire: nomprestataire.value,
+    email: email.value,
     nom: nom.value,
     type: type.value,
     date: date.value,
     creneau: creneau.value,
-    idEmplacement: idEmplacement.value
+    idEmplacement: idEmplacement.value,
+    description: description.value
   })
   if (res.error) { erreur.value = res.datas; return }
 
-  router.push('/presta')
+  router.push('/')
 }
 </script>
 
@@ -48,8 +54,17 @@ async function valider() {
     <p v-if="erreur" style="color: red">{{ erreur }}</p>
 
     <form @submit.prevent="valider">
-      <label>Nom
+      <label>Votre Nom
+        <input type="text" v-model="nomprestataire">
+      </label>
+      <label>Votre Email
+        <input type="text" v-model="email">
+      </label>
+      <label>Nom de la prestation
         <input type="text" v-model="nom">
+      </label>
+      <label>Description
+        <input type="text" v-model="description">
       </label>
 
       <label>Type

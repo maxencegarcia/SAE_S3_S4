@@ -8,6 +8,7 @@
       <li>
         <router-link to="/login">Login</router-link>
         <router-link to="/register">Register</router-link>
+        <router-link to="/addprestation">proposer sa prestation</router-link>
         <!-- <ul class="dropdown">
           <li>Register</li>
         </ul> -->

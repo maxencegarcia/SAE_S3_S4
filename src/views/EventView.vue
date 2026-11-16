@@ -24,7 +24,7 @@ function statut(ev) {
 // })
 
 onMounted(() => {
-  evenements.value = evenementsData
+  evenements.value = evenementsData.value
 })
 
 const image = {
