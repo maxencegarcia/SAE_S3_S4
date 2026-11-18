@@ -11,20 +11,10 @@ function state(activity) {
   const today = new Date().toISOString().slice(0, 10)
   const start = activity.startDate.slice(0, 10)
   const end = activity.endDate.slice(0, 10)
-  if (today < start) return 'à venir'
-  if (today > end) return 'terminé'
-  return 'en cours'
+  if (today < start) return {class: 'upcoming', text:'à venir'};
+  if (today > end) return {class:'finished', text: 'terminé'};
+  return {class: 'ongoing', text:'en cours'};
 }
-
-
-// conexion bdd peut etre ne jamais la remettre je ne sais pas trop a voir parce c'est plus pratique mais en meme temp 
-// la syntaxe js est immonde
-// peut etre supprimere ce message aussi
-
-// onMounted(async () => {
-//   const res = await fetch('http://localhost:3000/api/activityent')
-//   activityenements.value = await res.json()
-// })
 
 const router = useRouter();
 
@@ -61,30 +51,44 @@ function plan(activity){
 </script>
 
 <template>
-  <ul class="activities-container ">
+  <div class="d-flex flex-column align-self-start">
+  <h1>Prestations</h1>
+  <div class="activities-container ">
     <li v-for="activity in activities" :key="activity.id" style="list-style: none;" class="d-flex flex-column flex-align-start activity-card bg-light">
       <h3>{{ activity.name }} </h3>
-      <span class="text-primary" :class="state(activity)" >{{ state(activity) }}</span> <br>
+      <span  :class="state(activity).class" >{{ state(activity).text }}</span> <br>
       <img :src="getImage(activity)" :alt="activity.name" style="height: 400px; width: 1000px; cursor: pointer;" @click="plan(activity)"><br>
-      {{ activity.description }}
+      <p>{{ activity.description }}</p>
+      <p>{{activity.startDate}}</p>
+      <p>{{ activity.timeSlot }}</p>
         <router-link class="btn btn-info" :to="{  name: 'prestations', params: { id: activity.id } }">
         détails
       </router-link>
     </li>
-  </ul>
+  </div>
+  </div>
 </template>
 
 <style scoped>
 
 
-.activities-container {
 
-}
 .activity-card {
   border : 1px solid gray;
   border-radius: 10px;
-  margin: 10px;
+  margin-top: 10px;
   padding: 10px;
+}
 
+.upcoming {
+  color : #a5a539;
+}
+
+.ongoing {
+  color : #2563eb;
+}
+
+.finished {
+  color : red;
 }
 </style>
