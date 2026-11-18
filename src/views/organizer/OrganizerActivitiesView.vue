@@ -31,7 +31,7 @@ onMounted(() => activityStore.loadActivities())
 
         </div>
         <div class="boutons">
-            <button @click="activityStore.removeActivity(activity.id)" class="bouton-rouge">supprimer</button>
+            <button @click="activityStore.removeActivity(activity.id)" class="btn btn-danger">supprimer</button>
         </div>
       </li>
     </ul>

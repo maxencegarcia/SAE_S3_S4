@@ -1,6 +1,6 @@
-import { locations } from '../data/dataprestations'
-import { activities, participations } from '../data/usersDatas'
-
+import { locations } from '../data/activities.js'
+import { participations } from '../data/users.js'
+import {activities} from "../data/activities.js";
 
 let activitiesList = [...activities]
 let participationsList = [...participations]

@@ -2,16 +2,17 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
-import PrestatView from '../views/provider/ProviderView.vue'
+import ProviderView from '../views/provider/ProviderView.vue'
 import Defaultlayout from '../layouts/Defaultlayout.vue'
-import Prestalayout from '../layouts/prestalayout.vue'
-import EventView from '../views/ActivitiesView.vue'
-import Addpresta from '../views/provider/AddPrestaView.vue'
-import OrgaView from '../views/organizer/OrganizerView.vue'
-import Orgalayout from '../layouts/Orgalayout.vue'
-import OrgaPrestationView from '../views/organizer/OrganizerActivitiesView.vue'
-                                                                                                                                                                                                                                                                                                                                            import Requestnewprestataire from "../views/Requestnewprestataire.vue";
+import ActivitiesView from '../views/ActivitiesView.vue'
+import AddActivity from '../views/provider/AddPrestaView.vue'
+import OrganizerView from '../views/organizer/OrganizerView.vue'
+import Organizerlayout from '../layouts/OrganizerLayout.vue'
+import OrganizerActivitiesView from '../views/organizer/OrganizerActivitiesView.vue'
+import Requestnewprestataire from "../views/organizer/Requestnewprestataire.vue";
 import RegisterView from "../views/RegisterView.vue";
+import ProviderLayout from "../layouts/ProviderLayout.vue";
+import ActivityDetailsView from "../views/ActivityDetailsView.vue";
 
 
 const router = createRouter({
@@ -25,10 +26,10 @@ const router = createRouter({
             ]
         },
         {
-            path: '/event',
+            path: '/prestations',
             component: Defaultlayout,
             children: [
-                { path: '', component: EventView}
+                { path: '', component: ActivitiesView}
             ]
         },
         {
@@ -46,39 +47,47 @@ const router = createRouter({
             ]
         },
         {
-            path: '/orga',
-            component: Orgalayout,
+            path: '/organisateur',
+            component: Organizerlayout,
             children: [
-                { path: '', component: OrgaView}
+                { path: '', component: OrganizerView}
             ]
         },
         {
-          path : '/orga/prestations',
-          component: Orgalayout,
+          path : '/organisateur/prestations',
+          component: Organizerlayout,
             children : [
-                {path : '', component : OrgaPrestationView}
+                {path : '', component : OrganizerActivitiesView}
             ]
         },
         {
-            path : '/orga/demandeprestataires',
-            component: Orgalayout,
+            path : '/organisateur/demande-prestataires',
+            component: Organizerlayout,
             children : [
                 {path : '', component : Requestnewprestataire}
             ]
         },
         {
-            path : '/presta/addprestation',
-            component: Prestalayout,
+            path : '/prestataire/demande-prestation',
+            component: ProviderLayout,
             children : [
-                {path : '', component : Addpresta}
+                {path : '', component : AddActivity}
             ]
         },
         {
-            path: '/presta',
-            component: Prestalayout,
+            path: '/prestataire',
+            component: ProviderLayout,
             children: [
-                { path: '', component: PrestatView}
+                { path: '', component: ProviderView}
             ]
+        },
+        {
+            path : '/prestations/:id',
+            component : Defaultlayout,
+            children: [
+                {path :'', name: 'prestations', component: ActivityDetailsView }
+            ]
+
         }
 
         // {
@@ -95,10 +104,10 @@ const router = createRouter({
 router.beforeEach((to) => {
   const user = JSON.parse(localStorage.getItem('user') || 'null')
 
-  if (to.path.startsWith('/presta') && user?.role !== 'presta') {
+  if (to.path.startsWith('/prestataire') && user?.role !== 'presta') {
     return '/login'
   }
-  if (to.path.startsWith('/orga') && user?.role !== 'orga') {
+  if (to.path.startsWith('/organisateur') && user?.role !== 'orga') {
     return '/login'
   }
 })

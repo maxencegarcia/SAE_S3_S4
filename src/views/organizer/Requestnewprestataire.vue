@@ -19,11 +19,11 @@
 <script setup>
 
 import {computed, ref} from "vue"
-import {pendingrequest} from "../data/usersDatas.js";
-import Orgalayout from "../layouts/Orgalayout.vue";
-import UserService from "../services/user.service.js";
+import {pendingRequest} from "../../data/users.js";
+import Orgalayout from "../../layouts/OrganizerLayout.vue";
+import UserService from "../../services/user.service.js";
 
-const prestataire = computed(() => pendingrequest.value.filter(u => u.role==="presta"))
+const prestataire = computed(() => pendingRequest.value.filter(u => u.role==="presta"))
 
 async function accept(login, password, role, id){
   UserService.RemoveUserPendingRequestFromLocalSource(id);

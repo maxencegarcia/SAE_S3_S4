@@ -15,7 +15,7 @@
         <p class="hero-desc">
           Découvrez les jeux qui ont marqué l'année, les talents qui les ont façonnés et les récompenses qui célèbrent le meilleur de l'industrie vidéoludique.
         </p>
-        <RouterLink to="/event" class="hero-btn">
+        <RouterLink to="/prestations" class="hero-btn">
           Accéder aux événements
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2.5"

@@ -2,7 +2,7 @@
 </script>
 <template>
   <div class="app-shell">
-    <ul class="navbar">
+    <ul class="customised-nav-bar">
       <li><router-link to="/">Accueil</router-link></li>
       <li><input type="search" placeholder="Rechercher…"></li>
       <li>
@@ -25,7 +25,7 @@
 <style scoped> /**
  * maj pour visi de la nav bar au lieu de lien direct visible
  */
-.navbar {
+.customised-nav-bar {
   list-style: none;
   display: flex;
   align-items: center;
@@ -37,11 +37,11 @@
   margin: 0;
 }
 
-.navbar li {
+.customised-nav-bar li {
   margin: 0;
 }
 
-.navbar li input[type="search"] {
+.customised-nav-bar li input[type="search"] {
   border: 1px solid #d3d1c7;
   border-radius: 999px;
   padding: 0.5rem 0.9rem;
@@ -49,7 +49,7 @@
   background: #f5f4ef;
 }
 
-.navbar li a {
+.customised-nav-bar li a {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -63,7 +63,7 @@
   transition: background 0.2s ease;
 }
 
-.navbar li a:hover {
+.customised-nav-bar li a:hover {
   background: #3c3489;
 }
 

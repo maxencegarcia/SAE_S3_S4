@@ -56,10 +56,10 @@ async function connexion() {
     const user = result.data;
     localStorage.setItem('user', JSON.stringify({id: user.id, login: user.login, role: user.role}))
     if (user.role === "presta") {
-      router.push('/presta')
+      router.push('/prestataire')
     }
     else {
-      router.push('/orga')
+      router.push('/organisateur')
   }
 
 

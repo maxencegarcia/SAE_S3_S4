@@ -1,6 +1,6 @@
 
-import { pendingrequest } from "../data/usersDatas.js";
-import { users } from "../data/usersDatas.js";
+import { pendingRequest } from "../data/users.js";
+import { users } from "../data/users.js";
 import router from "../router/index.js";
 
 function getUser(login, password) {
@@ -39,7 +39,7 @@ function addUser(login, password, role) {
 
     const user = {login, password,  role, id};
     if (role==="presta") {
-        pendingrequest.value.push(user);
+        pendingRequest.value.push(user);
         router.push('/login');
     }
     else {
@@ -49,9 +49,9 @@ function addUser(login, password, role) {
 }
 
 function removeUserpending(id) {
-    const index = pendingrequest.value.findIndex(u => u.id === id);
+    const index = pendingRequest.value.findIndex(u => u.id === id);
     if(index>-1){
-        pendingrequest.value.splice(index, 1);
+        pendingRequest.value.splice(index, 1);
     }
 }
 

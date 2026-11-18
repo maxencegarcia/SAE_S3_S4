@@ -7,7 +7,7 @@ export const useActivitiesStore = defineStore('activities', () => {
 
     // 1. Les données : une ref par donnée, initialisée vide
 
-    const activities = ref()
+    const activities = ref([])
     const errors = ref();
     const providerActivities=ref([]);
 
@@ -24,8 +24,8 @@ export const useActivitiesStore = defineStore('activities', () => {
     }
 
     function reset() {
-        activities.value=null;
-        providerActivities.value=null;
+        activities.value=[];
+        providerActivities.value=[];
         errors.value=null;
     }
 
@@ -42,8 +42,6 @@ export const useActivitiesStore = defineStore('activities', () => {
         providerActivities.value = response.data;
         return true;
     }
-
-
 
 
     async function removeActivity(id) {
