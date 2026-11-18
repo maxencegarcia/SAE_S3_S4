@@ -48,7 +48,7 @@ function getImage(activity) {
     return image[activity.type]
   }
   else{
-    return '/public/images/' + activity.plan
+    return '/public/images/' + activity.layout
   }
 }
 
@@ -61,13 +61,30 @@ function plan(activity){
 </script>
 
 <template>
-  <ul>
-    <li v-for="activity in activities" :key="activity.id" style="list-style: none;">
-      {{ activity.name }} — <span :class="state(activity)">{{ state(activity) }}</span> <br>
-      <router-link :to="{  name: 'prestations', params: { id: activity.id } }">
-      <img :src="getImage(activity)" :alt="activity.name" style="height: 400px; width: 1000px; cursor: pointer;"><br>
+  <ul class="activities-container ">
+    <li v-for="activity in activities" :key="activity.id" style="list-style: none;" class="d-flex flex-column flex-align-start activity-card bg-light">
+      <h3>{{ activity.name }} </h3>
+      <span class="text-primary" :class="state(activity)" >{{ state(activity) }}</span> <br>
+      <img :src="getImage(activity)" :alt="activity.name" style="height: 400px; width: 1000px; cursor: pointer;" @click="plan(activity)"><br>
+      {{ activity.description }}
+        <router-link class="btn btn-info" :to="{  name: 'prestations', params: { id: activity.id } }">
+        détails
       </router-link>
-      {{ activity.description }} <br> <br> <br> <br>
     </li>
   </ul>
 </template>
+
+<style scoped>
+
+
+.activities-container {
+
+}
+.activity-card {
+  border : 1px solid gray;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+
+}
+</style>

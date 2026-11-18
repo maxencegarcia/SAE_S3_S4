@@ -184,3 +184,19 @@ input[type="search"] {
   height: 40px;
   background: #fff;
 }
+
+.flex-align-center {
+  align-items:  center;
+}
+
+.flex-align-start {
+  align-items: flex-start;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-start {
+  align-self: start;
+}

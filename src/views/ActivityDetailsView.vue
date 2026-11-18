@@ -23,16 +23,23 @@ const activity = computed(() => activitiesStore.activities.find( a => a.id === N
 
 
 <template>
-  <div v-if="activity">
-    <img :src="'src/assets/'+activity['image']" >
+  <div v-if="activity" class="d-flex flex-column flex-align-start">
+
+    <img class="align-self-center img-fluid" :src="'/public/images/'+activity['image']" >
     <h1> {{activity["name"]}} </h1>
     <h3> {{activity["description"]}}</h3>
     <h3>{{activity["startDate"]}} - {{activity["endDate"]}}</h3>
+    <router-link class="btn btn-info" to="/prestations">retour</router-link>
   </div>
-  <router-link to="/prestations">retour</router-link>
+
 
 </template>
 
 <style scoped>
 
+
+
+img {
+  max-height: 1000px;
+}
 </style>
