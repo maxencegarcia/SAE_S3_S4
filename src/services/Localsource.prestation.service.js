@@ -47,18 +47,8 @@ export async function getMesPrestations() {
 
     return ok(mesPrestations)
 }
-export async function getPendingPrestations() {
-    const user = exigerRole('presta')
-    if (!user) return erreur(403, 'Accès refusé')
-
-    const mesPrestations = listeParticipe
-        .filter(l => String(l.id) === String(user.id))
-        .map(l => {
-            const p = pendingprestation.value.find(p => p.idevent === l.idevent)
-            return { ...p, statut: l.statut }
-        })
-
-    return ok(mesPrestations)
+export function getPendingPrestations() {
+    return pendingprestation
 }
 
 export async function ProposePrestation({ nomprestataire, email, nom, type, date, creneau, idEmplacement, description }) {

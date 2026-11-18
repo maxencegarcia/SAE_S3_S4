@@ -46,6 +46,19 @@ async function valider() {
 
   router.push('/')
 }
+
+async function resize(fichier){
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.createElement('canvas')
+    canvas.width = img.width * 0.3
+    canvas.height = img.height * 0.3
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height)
+  }
+}
+async function chooseimage(e) {
+
+}
 </script>
 
 <template>
@@ -91,7 +104,9 @@ async function valider() {
           <option v-for="e in emplacements" :key="e.id" :value="e.id">{{ e.nom }}</option>
         </select>
       </label>
-
+      <label> L'image pour votre prestation (optionnel)
+      <input type="file" id="filephoto" accept="image/*"/>
+      </label>
       <button type="submit">Valider</button>
       <router-link to="/presta">Annuler</router-link>
     </form>
