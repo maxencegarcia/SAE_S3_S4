@@ -5,7 +5,7 @@
       <li><input type="search" placeholder="Rechercher…"></li>
       <li><a href="#" @click.prevent="deconnexion">Deconnexion</a></li>
       <li> <router-link to="/organisateur/prestations"> Vue des prestations </router-link> </li>
-      <li> <router-link to="/organisateur/demande-prestataires"> Demande prestataire </router-link> </li>
+      <li> <router-link to="/organisateur/demandes-prestation"> Demande prestations </router-link> </li>
     </ul>
 
     <main class="page-main">

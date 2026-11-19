@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import {storeToRefs} from "pinia";
-import { getLocations } from '../../services/Localsource.activities.service.js'
+import { getLocations } from '../../services/Localsource/Localsource.activities.service.js'
 import {useActivitiesStore} from "../../store/activities.store.js";
 
 const activityStore = useActivitiesStore();

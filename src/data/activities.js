@@ -5,12 +5,15 @@ export const services = [
     'Vente de goodies'
 ]
 
+
 export const locations = [
     { id: 1, name: 'Scène principale' },
     { id: 2, name: 'Stand A' },
     { id: 3, name: 'Stand B' },
     { id: 4, name: 'Zone détente' }
 ]
+
+
 
 export const activities = [
     {id: 1, name: 'Test de jeu en Duo', type: 'test', image: 'Testjeuduo.jpeg', layout: 'plan_jeu_duo.png', description: 'Un test de jeu en duo pour voir si on est capables de coopérer… ou si on va surtout se gêner mutuellement', startDate: '2026-12-12', endDate: '2026-12-12',timeSlot: '14:00-15:00', locationId: 2},

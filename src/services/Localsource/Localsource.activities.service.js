@@ -1,9 +1,13 @@
-import { locations } from '../data/activities.js'
-import { participations } from '../data/users.js'
-import {activities} from "../data/activities.js";
+import { locations } from '../../data/activities.js'
+import {activities} from "../../data/activities.js";
+import {participations} from "../../data/users.js";
+import LocalsourceUserService from "./Localsource.user.service.js";
 
+let participationsList=[...participations]
 let activitiesList = [...activities]
-let participationsList = [...participations]
+
+let ACTIVITY_ID_INCREMENT=activitiesList.length;
+
 
 //Alias sans erreur pour éviter à avoir à recopier { error, status, datas } à chaque fois
 function okResponse(data) {
@@ -14,17 +18,7 @@ function errorResponse(status, message) {
     return { error: 1, status, data: message }
 }
 
-function getUser() {
-    return JSON.parse(localStorage.getItem('user') || 'null')
-}
 
-function requireRole(role) {
-    const user = getUser()
-    if (!user || user.role !== role) {
-        return null
-    }
-    return user
-}
 
 export async function getLocations() {
     return okResponse(locations)
@@ -36,7 +30,7 @@ export async function getActivities() {
 }
 
 export async function getProviderActivities() {
-    const user = requireRole('presta')
+    const user = LocalsourceUserService.requireRole('presta')
     if (!user) return errorResponse(403, 'Accès refusé')
     const userActivities = participationsList
         .filter(l => String(l.providerId) === String(user.id))
@@ -48,14 +42,13 @@ export async function getProviderActivities() {
     return okResponse(userActivities)
 }
 
-export async function addActivity({ name, type, date, timeSlot,  locationId }) {
-    const user = requireRole('presta')
+export async function addActivity({ name, type, date, timeSlot,  locationId  } ) {
+    const user =  LocalsourceUserService.requireRole('orga')
     if (!user) return errorResponse(403, 'Accès refusé')
 
-    const activityId = Date.now()
-
+    const activityId = ++ACTIVITY_ID_INCREMENT
     activitiesList.push({
-        activityId: activityId,
+        id: activityId,
         name: name,
         type,
         image: null,
@@ -67,12 +60,10 @@ export async function addActivity({ name, type, date, timeSlot,  locationId }) {
         locationId: Number(locationId)
     })
 
-    participationsList.push({ providerId: user.id, activityId: activityId, statut: 'en attente' })
-
-    return okResponse({ idevent: activityId })
+    return okResponse({ activityId })
 }
 
-function removeActivityIdOccurencesFromParticipations(id) {
+export async function removeActivityIdOccurencesFromParticipations(id) {
     let i=0;
     while (i<participationsList.length) {
         if (participationsList[i].activityId===id) {
@@ -85,7 +76,7 @@ function removeActivityIdOccurencesFromParticipations(id) {
 }
 
 export async function removeActivity(id) {
-    const user = requireRole("orga");
+    const user = LocalsourceUserService.requireRole("orga");
     if (!user) return [];
     for (let i=0; i<activitiesList.length; i++) {
         console.log(activitiesList[i], id)
@@ -98,10 +89,10 @@ export async function removeActivity(id) {
     return errorResponse(404, "Prestation inexistante");
 }
 
-
 export default {
     getActivities,
     getProviderActivities,
     addActivity,
-    removeActivity
+    removeActivity,
+    getLocations
 };

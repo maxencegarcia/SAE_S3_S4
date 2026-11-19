@@ -1,4 +1,4 @@
-import LocalSource from "./Localsource.activities.service.js"
+import LocalSource from "./Localsource/Localsource.activities.service.js"
 
 
 async function getActivitiesFromLocalSource() {
@@ -32,11 +32,19 @@ async function addActivity(activity) {
     return addActivityFromLocalSource(activity)
 }
 
+async function getLocationsFromLocalSource() {
+    return LocalSource.getLocations();
+}
+
+async function getLocations() {
+    return getLocationsFromLocalSource();
+}
 
 
 export default {
     removeActivity,
     getActivities,
     getProviderActivities,
-    addActivity
+    addActivity,
+    getLocations
 };
