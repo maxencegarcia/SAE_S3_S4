@@ -54,11 +54,20 @@ export async function getActivityRequests() {
     return okResponse([...activityRequestsList]);
 }
 
+export async function getActivityRequest(id) {
+    let data = activityRequestsList.find( r => r.activityRequestId === id);
+    if (data === undefined) {
+        return errorResponse(404, "Pas de demande de prestation avec cet id");
+    }
+    return okResponse(data);
+}
+
 export default {
     offerActivity,
     rejectActivity,
     acceptActivityRequest,
-    getActivityRequests
+    getActivityRequests,
+    getActivityRequest
 }
 
 

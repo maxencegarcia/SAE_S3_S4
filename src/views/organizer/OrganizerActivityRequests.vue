@@ -30,15 +30,8 @@ const description = ref('')
 function locationName(id) {
   return locations.find(e => e.id === Number(id))?.name ?? 'Inconnu'
 }
-async function accept(id) {
-  const res = await ActivityRequestsService.acceptActivityRequest(id)
-  if (res.error) alert(res.data);
-  await load();
-}
-async function refuse(id){
-  const res = await ActivityRequestsService.rejectActivity(id);
-  await load();
-}
+
+
 //AcceptPrestation nomprestataire, email, nom, type, date, creneau, idEmplacement, description
 
 
@@ -69,8 +62,7 @@ async function refuse(id){
       </div>
 
       <div class="actions">
-        <button class="btn accepter" @click="accept(p.activityRequestId)">Accepter</button>
-        <button class="btn refuser" @click="refuse(p.activityRequestId)">Refuser</button>
+        <router-link :to="{path : `/organisateur/demandes-prestation/details/${p.activityRequestId}`} " class="btn btn-primary">Détails</router-link>
       </div>
     </article>
   </section>

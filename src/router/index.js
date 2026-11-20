@@ -10,11 +10,13 @@ import AddActivity from '../views/provider/ActivityProposition.vue'
 import OrganizerView from '../views/organizer/OrganizerView.vue'
 import Organizerlayout from '../layouts/OrganizerLayout.vue'
 import OrganizerActivitiesView from '../views/organizer/OrganizerActivitiesView.vue'
-import OrganizerPendingPrestation from "../views/organizer/OrganizerPendingPrestation.vue";
+import OrganizerPendingPrestation from "../views/organizer/OrganizerActivityRequests.vue";
 
 import RegisterView from "../views/RegisterView.vue";
 import ProviderLayout from "../layouts/ProviderLayout.vue";
 import ActivityDetailsView from "../views/ActivityDetailsView.vue";
+import OrganizerActivityRequestDetails from "../views/organizer/OrganizerActivityRequestDetails.vue";
+import OrganizerActivityReject from "../views/organizer/OrganizerActivityReject.vue";
 
 
 const router = createRouter({
@@ -63,15 +65,22 @@ const router = createRouter({
             ]
         },
         {
+            path : '/organisateur/demandes-prestation/details/:id',
+            component: Organizerlayout,
+            children : [
+                {path : '', component : OrganizerActivityRequestDetails}
+            ]
+        },
+        {
             path : '/demande-prestation',
-            component: ProviderLayout,
+            component: Organizerlayout,
             children : [
                 {path : '', component : AddActivity}
             ]
         },
         {
             path: '/prestataire',
-            component: ProviderLayout,
+            component: Organizerlayout,
             children: [
                 { path: '', component: ProviderView}
             ]
@@ -85,11 +94,19 @@ const router = createRouter({
         },
         {
             path : '/organisateur/demandes-prestation',
-            component : Defaultlayout,
+            component : Organizerlayout,
             children: [
-                {path :'', name: 'prestations', component: OrganizerPendingPrestation }
+                {path :'',  component: OrganizerPendingPrestation }
+            ]
+        },
+        {
+            path : '/organisateur/demandes-prestation/refuser/:id',
+            component : Organizerlayout,
+            children: [
+                {path :'',  component: OrganizerActivityReject }
             ]
         }
+
     ]
 })
 

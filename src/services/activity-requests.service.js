@@ -66,9 +66,25 @@ async function getActivityRequests() {
     return response
 }
 
+async function getActivityRequestFromLocalSource(id) {
+    let response = null
+    try {
+        response = await LocalSource.getActivityRequest(id);
+    } catch (err) {
+        response = { error: 1, status: 500, data: "Erreur lors de demande d'activité" }
+    }
+    return response
+}
+
+
+async function getAcitivityRequest(id) {
+    return await getActivityRequestFromLocalSource(id);
+}
+
 export default {
     offerActivity,
     rejectActivity,
     acceptActivityRequest,
-    getActivityRequests
+    getActivityRequests,
+    getAcitivityRequest
 }
